@@ -166,7 +166,7 @@ func (ch *CapabilityHandler) AddAction(name string, handler func(interface{}) (i
 
 type PropertyHandler interface {
 	GetValue() (interface{}, error)
-	SetValue(val interface{}) error
+	SetValue(val interface{}, token string) error
 	UpdateChannel() <-chan interface{}
 }
 
@@ -175,7 +175,7 @@ type PropertyHandlerSetterFunc func(val interface{}) error
 func (fn PropertyHandlerSetterFunc) GetValue() (interface{}, error) {
 	return nil, nil
 }
-func (fn PropertyHandlerSetterFunc) SetValue(val interface{}) error {
+func (fn PropertyHandlerSetterFunc) SetValue(val interface{}, token string) error {
 	return fn(val)
 }
 func (_ PropertyHandlerSetterFunc) UpdateChannel() <-chan interface{} {

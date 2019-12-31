@@ -211,7 +211,7 @@ func (s *Smarthome) setPropertyStatesAndCreateEndpointResponse(endpoint Endpoint
 		c := device.GetCapabilityHandler(capabilityName)
 		for propName, propValue := range properties {
 			if c != nil && c.propertyHandlers[propName] != nil {
-				if err := c.propertyHandlers[propName].SetValue(propValue); err != nil {
+				if err := c.propertyHandlers[propName].SetValue(propValue, endpoint.Scope.Token); err != nil {
 					return resp, err
 				}
 			}
